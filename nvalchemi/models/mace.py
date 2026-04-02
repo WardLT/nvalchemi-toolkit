@@ -317,7 +317,7 @@ class MACEWrapper(nn.Module, BaseModelMixin):
         Renaming happens *before* calling ``super()`` so the base auto-mapper
         sees the canonical key names.
         """
-        energy = raw_output["energy"]
+        energy = raw_output["energy"].detach()
         mapped: dict[str, Any] = {
             "energies": energy.unsqueeze(-1) if energy.ndim == 1 else energy,
         }
